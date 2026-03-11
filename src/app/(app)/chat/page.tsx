@@ -33,7 +33,7 @@ export default function ChatPage() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    fetch('/api/categories').then(r => r.json()).then(setCategories)
+    fetch('/api/categories').then(r => r.json()).then(d => setCategories(Array.isArray(d) ? d : []))
   }, [])
 
   useEffect(() => {

@@ -35,7 +35,7 @@ export default function ExpensesPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/categories').then(r => r.json()).then(setCategories)
+    fetch('/api/categories').then(r => r.json()).then(d => setCategories(Array.isArray(d) ? d : []))
   }, [])
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function ExpensesPage() {
     setLoading(true)
     const res = await fetch(`/api/expenses?period=${period}`)
     const data = await res.json()
-    setExpenses(data)
+    setExpenses(Array.isArray(data) ? data : [])
     setLoading(false)
   }
 

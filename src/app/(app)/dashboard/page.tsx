@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const firstName = session?.user?.name?.split(' ')[0] || 'Usuario'
 
   useEffect(() => {
-    fetch('/api/categories').then(r => r.json()).then(setCategories)
+    fetch('/api/categories').then(r => r.json()).then(d => setCategories(Array.isArray(d) ? d : []))
   }, [])
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export default function DashboardPage() {
       fetch(`/api/expenses?period=${period}`).then(r => r.json()),
       fetch(`/api/incomes?period=${period}`).then(r => r.json()),
     ]).then(([expData, incData]) => {
-      setExpenses(expData)
-      setIncomes(incData)
+      setExpenses(Array.isArray(expData) ? expData : [])
+      setIncomes(Array.isArray(incData) ? incData : [])
       setLoading(false)
     })
   }, [period])

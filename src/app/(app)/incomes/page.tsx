@@ -40,7 +40,7 @@ export default function IncomesPage() {
     setLoading(true)
     const res = await fetch(`/api/incomes?period=${period}`)
     const data = await res.json()
-    setIncomes(data)
+    setIncomes(Array.isArray(data) ? data : [])
     setLoading(false)
   }
 

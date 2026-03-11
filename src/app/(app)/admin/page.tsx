@@ -59,7 +59,7 @@ export default function AdminPage() {
     const res = await fetch('/api/users')
     if (res.ok) {
       const data = await res.json()
-      setUsers(data)
+      setUsers(Array.isArray(data) ? data : [])
     }
     setLoading(false)
   }
